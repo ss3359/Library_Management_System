@@ -26,7 +26,7 @@ public class Book{
    public  String genre; 
    private int year; 
    public  String[] BookTitles=new String[210];
-   public String[] BookAuthors=new String[210];
+   public  String[] BookAuthors=new String[210];
    public  String[] BookGenres=new String[210];
   
    

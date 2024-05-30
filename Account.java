@@ -30,9 +30,11 @@ public class Account extends Book {
 
     public Account() {
         Scanner s = new Scanner(System.in);
+        Scanner s2=new Scanner(System.in); 
 
         String title, author, genre;
 
+        System.out.println();
         System.out.println("Enter a title and/or author. ");
         title = s.nextLine();
         author = s.nextLine();
@@ -41,23 +43,26 @@ public class Account extends Book {
         author = author.toLowerCase();
 
         SearchBook(title, author);
+        
+        System.out.println("\nWould You Like To Check Out A Book?");
+        String decision=s2.nextLine(); 
+        
+        if(decision.equals("yes")){
+             System.out.println("Enter a title and/or author for the checkout book. ");
+             title = s2.nextLine();
+             author = s2.nextLine();
 
-    }
-
-    public List<String> AddBookToList(String book, boolean IsCheckedOut) {
-
-        if (IsCheckedOut == false) {
-            CheckOutList.add(book);
-        } else {
-            System.out.println("Time To Check Out! ");
+             title = title.toLowerCase();
+             author = author.toLowerCase();
+             CheckOutABook(title);
         }
+        
 
-        return CheckOutList;
     }
-
+    
     public String GetBookFromTheList(String title, String author, int position) {
 
-        return BookTitles[position] + "\t" + BookAuthors[position];
+        return BookTitles[position] + BookAuthors[position] + "\t";
     }
 
     public void SearchBook(String titleSearch, String authorSearch) {
@@ -90,24 +95,15 @@ public class Account extends Book {
 
         System.out.println("Results: " + books);
     }
+    public void CheckOutABook(String titleSearch){
+    for(int i=0; i<BookTitles.length; i++){
+        if(BookTitles[i].contains(titleSearch))
+            System.out.println("Checked Out: "+BookTitles[i]+ " by "+BookAuthors[i]);
+            BookTitles[i]="UNAVAILABLE";
+    }
+
+
+  }   
 
 }
 
-
-/*
-//Excess Code: 
-for(String title:BookTitles){
-            for(String author:BookAuthors){
-                for(String genre: BookGenres){
-                    if(title!=""&&title.contains(titleSearch)
-                            ||author!=""&&author.contains(authorSearch)
-                                    ||genre!=""&&genre.contains(genreSearch)){
-                       
-                      System.out.println(title+ " "+author+ " "+ genre);
-                      books++;
-                    }
-                     
-                }
-            }
-        }
- */
