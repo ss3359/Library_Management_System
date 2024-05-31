@@ -9,6 +9,7 @@
  * @author owner
  */
 
+import java.awt.ComponentOrientation;
 import java.util.Scanner;
 import java.util.Random;
 import java.io.*;
@@ -171,26 +172,8 @@ public class LibraryGUISystem extends javax.swing.JFrame{
         String textTwo=jTextField3.getText(); 
         String result; 
         int books = 0;
-        boolean b1 = false, b2 = false;
-        Account a = new Account();
-
-      for (int position = 0; position < a.BookTitles.length; position++) {
-
-            String title=a.BookTitles[position], author=a.BookAuthors[position];
-           
-            b1 = title.startsWith(textOne);
-            b2 = author.startsWith(textTwo);
-            
-            if (((b1 == true)&&textOne!="")||(b2 == true&&textTwo!="")) {
-                
-                jTextArea1.append(a.GetBookFromTheList(title, author, position)+"\n"); 
-                books++;
-            }
         
-        
-      }
-        
-        
+        SearchBook(textOne,textTwo); 
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     /**
@@ -240,4 +223,41 @@ public class LibraryGUISystem extends javax.swing.JFrame{
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+public void SearchBook(String titleSearch, String authorSearch) {
+    titleSearch=titleSearch.toLowerCase(); authorSearch=authorSearch.toLowerCase(); 
+    Book b = new Book();
+        int books = 0;
+        if (titleSearch == "") {
+            for (int i = 0; i < b.BookAuthors.length; i++) {
+                if (b.BookAuthors[i].contains(authorSearch)) {
+                    jTextArea1.append(b.BookTitles[i] + "\t" + b.BookAuthors[i]+"\n"); 
+//                    System.out.println(b.BookTitles[i] + "\t" + b.BookAuthors[i]);
+                    books++;
+                }
+            }
+        } else if (authorSearch == "") {
+            for (int i = 0; i < b.BookTitles.length; i++) {
+                if (b.BookTitles[i].contains(titleSearch)) {
+                    jTextArea1.append(b.BookTitles[i] + "\t" + b.BookAuthors[i]+"\n"); 
+//                    System.out.println(b.BookTitles[i] + "\t" + b.BookAuthors[i]);
+                    books++;
+                }
+            }
+        } else {
+            for (int position = 0; position < b.BookTitles.length; position++) {
+                if ((b.BookTitles[position].contains(titleSearch))
+                        && (b.BookAuthors[position].contains(authorSearch))) {
+                    jTextArea1.append(b.BookTitles[position] + "\t" + b.BookAuthors[position]+"\n"); 
+
+//                  System.out.println(b.BookTitles[position] + "\t" + b.BookAuthors[position]);
+                    books++;
+                }
+            }
+        }
+
+        jTextArea1.append("Results: "+books);
+    }
+
+
 }

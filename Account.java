@@ -60,6 +60,8 @@ public class Account extends Book {
 
     }
     
+ 
+    
     public String GetBookFromTheList(String title, String author, int position) {
 
         return BookTitles[position] + BookAuthors[position] + "\t";
@@ -95,6 +97,12 @@ public class Account extends Book {
 
         System.out.println("Results: " + books);
     }
+    
+    
+    // Same function but is used in the GUI
+    
+    
+    
     public void CheckOutABook(String titleSearch){
     for(int i=0; i<BookTitles.length; i++){
         if(BookTitles[i].contains(titleSearch))
